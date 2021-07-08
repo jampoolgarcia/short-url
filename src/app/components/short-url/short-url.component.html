@@ -1,0 +1,38 @@
+<div class="container my-5">
+  <h1 class="text-center">Enter url to short</h1>
+  <div class="row my-4">
+    <div class="col-lg-12">
+      <div class="input-group">
+        <input type="url"
+               required
+               class="form-control form-control-lg text-lg" 
+               name="url"
+               [formControl]="url" 
+               aria-describedby="url"
+               [ngClass]="{
+                'is-invalid': url.dirty && url.invalid
+               }"
+               placeholder="Enter url to short">
+        <button type="button" (click)="onSubmit()" [disabled]="url.invalid || isLoading" class="btn btn-primary btn-lg w-40 p-0">
+          <span class="text-lg">Send</span>
+          <span *ngIf="isLoading" class="spinner-border lg ml-2" role="status" aria-hidden="true"></span>
+        </button>
+        <div class="invalid-feedback text-lg animate__animated animate__fadeInDown">
+            {{ getMsg(url) }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row animate__animated animate__fadeIn" *ngIf="shortUrl.length > 0">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <input type="text"
+               class="form-control form-control-lg text-lg" 
+               name="shortUrl"
+               [(ngModel)]="shortUrl" 
+               aria-describedby="shortUrl" 
+               readonly>
+      </div>
+    </div>
+  </div>
+</div>
